@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Cipher Tool</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <h1>Cipher Tool</h1>
+
+  <!-- ===== PART 3: Cipher Type Selector ===== -->
+  <div class="section">
+    <h2>1. Pick a cipher type</h2>
+
+    <label for="cipherType">Cipher type:</label>
+    <select id="cipherType" onchange="cipherTypeChanged()">
+      <option value="caesar">Caesar (shift N)</option>
+      <option value="substitution">Substitution (random / loaded mapping)</option>
+    </select>
+
+    <!-- this box only shows when Caesar is picked -->
+    <div id="shiftBox">
+      <label for="shiftAmount">Shift amount (0 to 25):</label>
+      <input type="number" id="shiftAmount" value="3" min="0" max="25">
+    </div>
+  </div>
+
+  <!-- ===== PART 1: Generate New Cipher ===== -->
+  <div class="section">
+    <h2>2. Generate a new cipher</h2>
+    <button onclick="generateCipher()">Generate New Cipher</button>
+  </div>
+
+  <!-- ===== PART 2: Load Cipher ===== -->
+  <div class="section">
+    <h2>3. Or load your own cipher</h2>
+    <p>Type 26 letters. The first letter is what A becomes, the second is what B becomes, and so on.</p>
+    <input type="text" id="cipherInput" placeholder="QWERTYUIOPASDFGHJKLZXCVBNM" size="30">
+    <button onclick="loadCipher()">Load Cipher</button>
+    <p id="errorMessage" class="error"></p>
+  </div>
+
+  <!-- ===== PART 4: Current Mapping Display ===== -->
+  <div class="section">
+    <h2>4. Current mapping</h2>
+    <div id="mappingDisplay" class="tiles">
+      <p>No cipher yet. Generate one or load one above.</p>
+    </div>
+  </div>
+
+  <!-- ===== PART 5: Encrypt / Decrypt ===== -->
+  <div class="section">
+    <h2>5. Encrypt or decrypt a message</h2>
+    <textarea id="inputText" rows="4" cols="50" placeholder="Type your message here"></textarea>
+    <br>
+    <button onclick="encryptText()">Encrypt</button>
+    <button onclick="decryptText()">Decrypt</button>
+    <br>
+    <textarea id="outputText" rows="4" cols="50" placeholder="Result shows up here" readonly></textarea>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
