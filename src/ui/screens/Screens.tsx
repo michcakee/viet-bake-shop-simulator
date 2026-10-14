@@ -202,7 +202,7 @@ export function Title({ onContinue, onNew }: { onContinue: () => void; onNew: ()
       </div>
       <footer className="title-foot">
         <span>v{APP_VERSION}</span>
-        <span className="title-foot-mid">{isNativeApp() ? 'Saves on this device. No account needed.' : ON_ITCH ? 'Saves in your browser. No account needed.' : 'Saves in your browser. No account needed. Works offline.'}</span>
+        <span className="title-foot-mid">{isNativeApp() ? 'Saves on this device. No account needed.' : ON_ITCH ? 'Saves in this browser. Copy a save code in Settings to keep your bakery safe.' : 'Saves in your browser. No account needed. Works offline.'}</span>
         <span className="title-by">by mich! &lt;3</span>
       </footer>
       {fs.supported && (

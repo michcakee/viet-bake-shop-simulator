@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { ECON } from '../data/config';
-import { DIAMOND, DIAMOND_PACKS, DREAM, DREAM_ORDER, type DreamDef, type DreamId } from '../data/dream';
+import { DIAMOND, DREAM, DREAM_ORDER, DREAM_PASS, type DreamDef, type DreamId } from '../data/dream';
 import { ROLES } from '../data/world';
 import { dreamApplicant } from '../engine/labor';
 import { featureOn } from '../engine/unlocks';
@@ -9,7 +9,7 @@ import { useGame } from './GameContext';
 import { Btn } from './kit';
 import { Modal } from './overlays';
 import { Person, Sprite } from './pixel/Sprite';
-import { buyPack, canBuy, storePrices } from './purchases';
+import { buyDreamTeam, canBuy, restoreDreamTeam, storePrice } from './purchases';
 
 const x = (m: number) => `${(1 / m).toFixed(1).replace(/\.0$/, '')}×`;
 
@@ -78,53 +78,57 @@ function Member({ id }: { id: DreamId }) {
   );
 }
 
-/** Buy diamond packs (iOS app only) or see how to earn them. */
+/** How to earn diamonds, and (iOS app only) the one purchase: the whole team at once. */
 function GetDiamonds() {
   const { dispatch, state: s } = useGame();
-  const [prices, setPrices] = useState<Record<string, string>>({});
-  const [busy, setBusy] = useState<string | null>(null);
+  const [price, setPrice] = useState<string | null>(null);
+  const [asked, setAsked] = useState(false);
+  const [busy, setBusy] = useState(false);
   const [note, setNote] = useState<string | null>(null);
   const store = canBuy();
+  const all = DREAM_ORDER.every((id) => (s.dreamTeam ?? []).includes(id));
+  const grant = () => dispatch({ type: 'ownDreamTeam' });
   useEffect(() => {
-    if (store) void storePrices().then(setPrices);
+    if (store) void storePrice().then((p) => (setPrice(p), setAsked(true)));
   }, [store]);
-  const buy = async (product: string) => {
-    setBusy(product);
+  const buy = async () => {
+    setBusy(true);
     setNote(null);
-    const r = await buyPack(product, (n) => dispatch({ type: 'addDiamonds', n }));
-    setBusy(null);
-    setNote(r.ok ? `+${r.diamonds} diamonds. Thank you!` : r.message);
+    const r = await buyDreamTeam(grant);
+    setBusy(false);
+    setNote(r.ok ? 'Thank you! The whole Dream team is yours.' : r.message);
+  };
+  const restore = async () => {
+    setBusy(true);
+    setNote(null);
+    const r = await restoreDreamTeam(grant);
+    setBusy(false);
+    setNote(r.message);
   };
   return (
-    <section className="get-diamonds" aria-label="Get diamonds">
+    <section className="get-diamonds" aria-label="Get the Dream team">
       <p className="small free-diamonds">
         <Sprite name="star" scale={2} />
         <span>
           <b>Free:</b> every 3-star day pays <b>{DIAMOND.perThreeStarDay} diamonds</b>.{(s.diamondsEarned ?? 0) > 0 && ` This bakery has earned ${s.diamondsEarned} so far.`}
         </span>
       </p>
-      {store ? (
+      {store && !all && (
         <>
-          <div className="diamond-packs">
-            {DIAMOND_PACKS.map((p) => {
-              const price = prices[p.product];
-              return (
-                <button key={p.product} type="button" className="diamond-pack" disabled={!price || busy !== null} onClick={() => void buy(p.product)}>
-                  <span className="pack-count">
-                    <Sprite name="diamond" scale={3} /> {p.diamonds}
-                  </span>
-                  <span className="pack-name">{p.name}</span>
-                  {p.note && <span className="pack-note">{p.note}</span>}
-                  <b className="pack-price">{busy === p.product ? 'Buying…' : price ?? 'Not available'}</b>
-                </button>
-              );
-            })}
-          </div>
-          {Object.keys(prices).length === 0 && <p className="small muted">The App Store isn’t answering right now. Check your connection and open this again.</p>}
+          <button type="button" className="diamond-pack dream-pass" disabled={!price || busy} onClick={() => void buy()}>
+            <span className="pack-name">{DREAM_PASS.name}, right now</span>
+            <span className="pack-note">One purchase, yours for good. Nothing else is for sale.</span>
+            <b className="pack-price">{busy ? 'One moment…' : price ?? (asked ? 'Not available' : '…')}</b>
+          </button>
+          {asked && !price && <p className="small muted">The App Store isn’t answering right now. Check your connection and open this again.</p>}
         </>
-      ) : (
-        <p className="small muted">Diamonds can’t be bought here. Earn them with 3-star days.</p>
       )}
+      {store && (
+        <button type="button" className="link-btn restore-btn" disabled={busy} onClick={() => void restore()}>
+          Restore purchase
+        </button>
+      )}
+      {!store && <p className="small muted">Nothing is sold here. Earn diamonds with 3-star days.</p>}
       {note && (
         <p className="small purchase-note" role="status">
           {note}
@@ -153,7 +157,7 @@ export function DreamTeamSheet({ onClose }: { onClose: () => void }) {
           <Member key={id} id={id} />
         ))}
       </ul>
-      <p className="small muted">Diamonds and the Dream team you unlock belong to this device: every bakery you play here shares them. Let someone go and they wait in the applicants to be hired again.</p>
+      <p className="small muted">Diamonds and the Dream team you unlock belong to this device: every bakery you play here shares them. A Dream team bought in the app comes back with Restore purchase. Let someone go and they wait in the applicants to be hired again.</p>
     </Modal>
   );
 }

@@ -288,7 +288,7 @@ On Android, the back button closes windows and sheets, then returns to Today.
 
 - **Five special staff:** Vy (pastry counter), Yen Vy (drinks), Hieu (bánh mì), Sang (baking) and Phuong Khanh (pastry quality). These names belong to them alone, and only they have the bright hair colours.
 - **Way more efficient:** each serves any order, two to three times faster than the best person you can hire, and never fumbles one. Their service is so good that customers tip two to three times more, plus a bonus on every great order. Each also preps trays before opening (Sang the most) and lifts bake quality (Phuong Khanh the most). They're paid the ordinary going rate and never quit.
-- **Diamonds unlock them:** 60 for Vy, 80 for Yen Vy, 100 for Hieu, 120 for Sang and 150 for Phuong Khanh. Every 3-star day pays 5 diamonds for free. In the iPhone and iPad app you can also buy packs of 60, 200 or 520 diamonds: much faster.
+- **Diamonds unlock them:** 60 for Vy, 80 for Yen Vy, 100 for Hieu, 120 for Sang and 150 for Phuong Khanh. Every 3-star day pays 5 diamonds for free. In the iPhone and iPad app you can also unlock all five at once with one purchase.
 - **Where:** tap the diamond counter at the top, or *See them* on the Staff tab. Once unlocked, they wait in the applicants every week; hire them any morning, and if you let one go they come back to the pile.
-- **One wallet per device:** diamonds and unlocked members are shared by every bakery on the device. *Delete all my data* erases them too.
+- **One wallet per device:** diamonds and unlocked members are shared by every bakery on the device. *Delete all my data* erases them too; a Dream team bought in the app comes back with *Restore purchase*.
 

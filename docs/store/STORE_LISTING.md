@@ -11,7 +11,7 @@
 | Subtitle (iOS, 30 chars) | Run a cozy Vietnamese bakery |
 | Bundle / package ID | `com.michcakee.vietbakeshop` |
 | Category | Games → Simulation (secondary: Education) |
-| Price | Free, with optional in-app purchases (diamond packs). No ads |
+| Price | Free, with one optional in-app purchase (the whole Dream team). No ads |
 | Developer name | My-Vien Nguyen |
 | Support email | myvientrannguyen@gmail.com |
 | Website | https://michcakee.github.io/viet-bake-shop-simulator/ |
@@ -49,24 +49,24 @@ Cozy and Vietnamese
 
 Fair and private
 • No ads, no account
-• Optional diamond packs unlock the Dream team sooner; every 3-star day earns diamonds for free
+• One optional purchase unlocks the whole Dream team; or earn diamonds on 3-star days and unlock them for free
 • Plays fully offline
 • Saves stay on your device
 
-## In-app purchases (set up in App Store Connect)
+## In-app purchase (set up in App Store Connect)
 
-Create these under *Monetization → In-App Purchases* as **Consumable**, with exactly these product IDs (the game looks them up by ID; `src/data/dream.ts`). Each needs a display name, a description, a price tier and a review screenshot of the Dream team screen (`docs/store/screenshots/` has the game; take one of the diamond shop from TestFlight). Submit them **with** the app version that adds them.
+Create one product under *Monetization → In-App Purchases* as **Non-Consumable**, with exactly this product ID (the game looks it up by ID; `src/data/dream.ts`). It needs a display name, a description, a price tier and a review screenshot of the Dream team screen (take one from TestFlight). Submit it **with** the app version that adds it.
 
 | Product ID | Reference name | Display name | Description | Price |
 | --- | --- | --- | --- | --- |
-| `com.michcakee.vietbakeshop.diamonds60` | Diamonds 60 | Handful of diamonds | 60 diamonds: enough to unlock Vy. | $0.99 |
-| `com.michcakee.vietbakeshop.diamonds200` | Diamonds 200 | Pouch of diamonds | 200 diamonds for the Dream team. | $2.99 |
-| `com.michcakee.vietbakeshop.diamonds520` | Diamonds 520 | Chest of diamonds | 520 diamonds: the whole Dream team. | $5.99 |
+| `com.michcakee.vietbakeshop.dreamteam` | Dream team | The whole Dream team | Unlocks all five Dream team staff, for good. | $4.99 |
 
-- Diamonds are consumables, so there's nothing to "restore": Apple doesn't require a Restore button for them. They live on the device (see the privacy policy).
-- Every 3-star day also pays 5 diamonds, so everything can be earned without paying.
+- It is non-consumable, so Apple keeps the record: the game checks on every launch, and **Restore purchase** on the Dream team screen brings it back after a reinstall or on a new phone. Turn on Family Sharing for it if you like.
+- If the old consumable packs (`diamonds60`, `diamonds200`, `diamonds520`) were already created in App Store Connect, remove them from sale; the game no longer asks for them.
+- Diamonds are earned only: every 3-star day pays 5, so the whole team can be unlocked without paying.
+- Enrol in the App Store Small Business Program (15% instead of 30%) at least a month before launch: the lower rate starts 15 days after the end of the month Apple approves it.
 - *App Privacy* stays **Data Not Collected**: Apple processes the payment and the game sends nothing to us.
-- Review notes for Apple: "Diamonds are an optional consumable currency for unlocking the Dream team characters (Staff tab, or the diamond counter in the top bar). They can also be earned in play: 5 per 3-star day. Nothing is random."
+- Review notes for Apple: "One optional non-consumable purchase unlocks the five Dream team characters (Staff tab, or the diamond counter in the top bar). Restore purchase is on the same screen. The characters can also be unlocked one at a time with diamonds earned in play: 5 per 3-star day. Nothing is random."
 
 ## Keywords (iOS, 100 chars)
 
@@ -76,7 +76,7 @@ bakery,tycoon,business,vietnamese,banh mi,cozy,pixel,economics,cafe,shop,manager
 
 ## What's new (3.1.0)
 
-Now called Viet Bake Shop Simulator. Meet the Dream team: Vy, Yen Vy, Hieu, Sang and Phuong Khanh, five all-rounders who serve anything at lightning speed and earn the biggest tips in town. Unlock them with diamonds: earn them on 3-star days or buy a pack. The tutorial and Bà's lessons make the next button to tap shine, with a little arrow, until you tap it. Plus a step-by-step first day with Bà, your first customer Kevin Nguyen (who later asks for a job), quests and a star shop for new looks, a clearer day report, and a new first recipe: bánh mì que. The game now asks your name, and the last recipe in the book is a secret worth playing for.
+Now called Viet Bake Shop Simulator. Meet the Dream team: Vy, Yen Vy, Hieu, Sang and Phuong Khanh, five all-rounders who serve anything at lightning speed and earn the biggest tips in town. Unlock them with diamonds you earn on 3-star days, or all at once with one purchase. The tutorial and Bà's lessons make the next button to tap shine, with a little arrow, until you tap it. Plus a step-by-step first day with Bà, your first customer Kevin Nguyen (who later asks for a job), quests and a star shop for new looks, a clearer day report, and a new first recipe: bánh mì que. The game now asks your name, and the last recipe in the book is a secret worth playing for.
 
 ## Assets
 

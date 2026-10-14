@@ -141,31 +141,24 @@ export function normalHairColor(i: number): number {
 // ------------------------------------------------------------------ diamonds
 
 /**
- * Diamonds come two ways: free, a handful on every 3-star day, or bought in the iOS app (the fast way).
- * They belong to the device, not one bakery: every save slot shares the same diamonds and Dream team.
+ * Diamonds are earned, never bought: a handful on every 3-star day. They belong to the device, not
+ * one bakery: every save slot shares the same diamonds and Dream team.
  */
 export const DIAMOND = {
   /** Diamonds for a day with all three stars. A keen player gets about 13 of those in the first month. */
   perThreeStarDay: 5,
 };
 
-export interface DiamondPack {
-  /** App Store product id (a consumable in-app purchase). */
-  product: string;
-  diamonds: number;
-  name: string;
+/**
+ * The one thing for sale (iOS app only): the whole Dream team, at once. It is a non-consumable
+ * purchase, so the App Store remembers it: a reinstall or a new phone gets it back with Restore.
+ */
+export const DREAM_PASS = {
+  product: 'com.michcakee.vietbakeshop.dreamteam',
+  name: 'The whole Dream team',
   /** Shown until the App Store sends the real, local price. */
-  price: string;
-  note?: string;
-}
-
-export const DIAMOND_PACKS: DiamondPack[] = [
-  { product: 'com.michcakee.vietbakeshop.diamonds60', diamonds: 60, name: 'Handful of diamonds', price: '$0.99', note: 'Enough for Vy' },
-  { product: 'com.michcakee.vietbakeshop.diamonds200', diamonds: 200, name: 'Pouch of diamonds', price: '$2.99', note: '+11% extra' },
-  { product: 'com.michcakee.vietbakeshop.diamonds520', diamonds: 520, name: 'Chest of diamonds', price: '$5.99', note: 'The whole Dream team' },
-];
-
-export const packFor = (product: string) => DIAMOND_PACKS.find((p) => p.product === product);
+  price: '$4.99',
+};
 
 /** About how much faster than a normal pro this person works at their best job (ignores morale). */
 export function dreamSpeedUp(d: DreamDef): number {

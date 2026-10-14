@@ -183,7 +183,7 @@ export function Settings({ onClose, onQuit }: { onClose: () => void; onQuit: () 
       <h3 className="danger-title">Delete all my data</h3>
       <div className="danger-zone">
         <p className="small">
-          <b>Erases everything this game has stored on this device</b>: all three save slots, their backups, your settings, and your diamonds and Dream team (bought diamonds included). The page reloads to a clean start. It can't be undone.
+          <b>Erases everything this game has stored on this device</b>: all three save slots, their backups, your settings, and your earned diamonds and Dream team (a Dream team bought in the app comes back with Restore purchase). The page reloads to a clean start. It can't be undone.
         </p>
         <label htmlFor="wipe-confirm" className="small">
           Type <b>DELETE</b> to confirm

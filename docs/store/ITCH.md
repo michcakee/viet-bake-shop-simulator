@@ -51,7 +51,11 @@ Sign in at itch.io → **Dashboard → Create new project**.
 > • Earn diamonds on 3-star days to unlock the Dream team
 > • Saves stay in your browser; copy a save code in Settings to back up or move your bakery
 
-Leave out "Plays fully offline" and the line about diamond packs: neither is true on itch.
+Leave out "Plays fully offline" and the line about the Dream team purchase: neither is true on itch.
+
+Put this as the **first line** of the description, above everything else, because browsers (Safari most of all) can clear a game's storage inside itch's frame:
+
+> Playing for more than a day? Open Settings and copy a save code now and then. Paste it back any time to restore your bakery.
 
 ## 3. Check before going public
 

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { DIAMOND, DIAMOND_PACKS, DREAM, DREAM_NAMES, DREAM_ORDER, BRIGHT_HAIR, packFor } from '../../src/data/dream';
+import { DIAMOND, DREAM, DREAM_NAMES, DREAM_ORDER, DREAM_PASS, BRIGHT_HAIR } from '../../src/data/dream';
 import { REGULARS } from '../../src/data/people';
 import { FRIENDS, STAFF_NAMES } from '../../src/data/world';
 import { balanceSheet, bookEquity } from '../../src/engine/accounting';
@@ -150,21 +150,21 @@ describe('diamonds', () => {
     expect(t.diamonds ?? 0).toBe(0);
   });
 
-  it('buying is far faster than earning: the smallest pack beats a dozen 3-star days for the first unlock', () => {
-    expect(DIAMOND_PACKS[0].diamonds).toBeGreaterThanOrEqual(DREAM.vy.cost);
-    expect(DIAMOND_PACKS[DIAMOND_PACKS.length - 1].diamonds).toBeGreaterThanOrEqual(DREAM_ORDER.reduce((t, id) => t + DREAM[id].cost, 0));
+  it('earning takes a while: at least ten 3-star days for the first unlock', () => {
     expect(DREAM.vy.cost / DIAMOND.perThreeStarDay).toBeGreaterThanOrEqual(10);
-    for (const p of DIAMOND_PACKS) expect(packFor(p.product)).toBe(p);
-    expect(new Set(DIAMOND_PACKS.map((p) => p.product)).size).toBe(DIAMOND_PACKS.length);
+    expect(DREAM_PASS.product).toMatch(/^com\.michcakee\.vietbakeshop\./);
   });
 
-  it('purchased diamonds are added only for sane amounts and never touch the books', () => {
-    const s = start(10);
-    for (const n of [0, -5, NaN, Infinity, 1e9]) expect(gameReducer(s, { type: 'addDiamonds', n })).toBe(s);
-    const t = gameReducer(s, { type: 'addDiamonds', n: 60 });
-    expect(t.diamonds).toBe(60);
+  it('the Dream team purchase unlocks all five once, costs no diamonds and never touches the books', () => {
+    const s = { ...start(10), diamonds: 30, dreamTeam: ['vy' as const] };
+    const t = gameReducer(s, { type: 'ownDreamTeam' });
+    expect([...(t.dreamTeam ?? [])].sort()).toEqual([...DREAM_ORDER].sort());
+    expect(t.diamonds).toBe(30);
     expect(t.cash).toBe(s.cash);
+    expect(DREAM_ORDER.every((id) => t.applicants.some((a) => a.dream === id))).toBe(true);
     balanced(t);
+    // Asked again on every launch: nothing changes the second time.
+    expect(gameReducer(t, { type: 'ownDreamTeam' })).toBe(t);
   });
 
   it('the device wallet loads into a bakery, cleaned of anything unknown', () => {

@@ -8,7 +8,7 @@ Viet Bake Shop Simulator is a single-player game. It is designed to collect noth
 
 **Nothing.** The game has no accounts, no analytics, no advertising, no crash reporting and no tracking of any kind. It never sends anything to us.
 
-**In-app purchases (iPhone and iPad app only).** Diamond packs are sold through Apple's App Store. Apple handles the payment; we never receive your name, Apple ID, email or payment details. Apple tells the app only which pack was bought and a transaction number, which stays on your device. Purchases are processed under [Apple's privacy policy](https://www.apple.com/legal/privacy/).
+**In-app purchase (iPhone and iPad app only).** One optional purchase, the whole Dream team, is sold through Apple's App Store. Apple handles the payment; we never receive your name, Apple ID, email or payment details. Apple tells the app only whether this Apple Account owns the purchase. Purchases are processed under [Apple's privacy policy](https://www.apple.com/legal/privacy/).
 
 ## What stays on your device
 
@@ -17,9 +17,9 @@ Your bakery (the save game, including the bakery name and the first name or nick
 - **Save codes:** if you copy a save code, it contains only your game data. Where you paste it is up to you.
 - **Email restore link** (web version only): this opens *your own* email app with a link containing your save code. We never see the email or your address.
 
-Your diamonds, the Dream team you unlock, and the transaction numbers of App Store purchases (so none is counted twice) are stored on the device too, shared by every bakery on it.
+Your diamonds and the Dream team you unlock are stored on the device too, shared by every bakery on it.
 
-Uninstalling the app (or clearing your browser's site data, or **Settings → Delete all my data**) deletes your saves, diamonds and Dream team. Purchased diamonds can't be restored after that.
+Uninstalling the app (or clearing your browser's site data, or **Settings → Delete all my data**) deletes your saves, earned diamonds and Dream team. A Dream team bought in the app is kept by Apple: tap **Restore purchase** on the Dream team screen to get it back.
 
 ## Permissions
 
@@ -27,7 +27,7 @@ The mobile app doesn't request access to your location, contacts, camera, microp
 
 ## Children
 
-The game is suitable for all ages and collects no personal information from anyone, including children. The iOS app offers optional diamond packs; Apple's Ask to Buy and Screen Time let a parent approve or turn off purchases.
+The game is suitable for all ages and collects no personal information from anyone, including children. The iOS app offers one optional purchase; Apple's Ask to Buy and Screen Time let a parent approve or turn off purchases.
 
 ## Changes
 

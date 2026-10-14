@@ -50,7 +50,7 @@ import { bondCapacity, borrowingLimit, creditLimit, creditLineRate, investorTerm
 import { suggestedTrays, forecast, ingredientsNeeded } from './forecast';
 import { bump, decide, learn, spend, toast } from './helpers';
 import { hireValue, makeEmployee, marketWage, quitters, updateMorale, weeklyApplicants, withDream } from './labor';
-import { DIAMOND, DREAM, isDreamId } from '../data/dream';
+import { DIAMOND, DREAM, DREAM_ORDER, isDreamId } from '../data/dream';
 import { createMacro, dailyMacro, monthlyMacro } from './macro';
 import { generateMarket } from './market';
 import { applySchedule, checkProgress, goalMet, weeklyReward, WEEKLY_GOALS } from './progression';
@@ -316,8 +316,8 @@ export type Action =
   | { type: 'claim'; visitId: number; release?: boolean }
   | { type: 'setStaffMode'; mode: 'help' | 'all' }
   | { type: 'starsForCash' }
-  /** Diamonds the App Store just confirmed were bought. */
-  | { type: 'addDiamonds'; n: number }
+  /** The App Store confirmed this player owns the Dream team purchase (bought now, or restored). */
+  | { type: 'ownDreamTeam' }
   | { type: 'unlockDream'; id: string }
   /** Device-wide diamonds and Dream team, loaded into this bakery. */
   | { type: 'syncWallet'; diamonds: number; dreamTeam: string[] }
@@ -1196,10 +1196,11 @@ function reduce(s: GameState, a: Action): GameState {
       const next = move({ ...s, questProgress: { ...s.questProgress, starsSpent: (s.questProgress.starsSpent ?? 0) + STAR_CASH.stars } }, 'cashOperatingOther', STAR_CASH.cash, { otherIncome: STAR_CASH.cash });
       return toast(next, 'info', `Bà’s tip jar: +$${STAR_CASH.cash}`, `${STAR_CASH.stars} stars turned into cash for the bakery.`);
     }
-    case 'addDiamonds': {
-      const n = Math.floor(a.n);
-      if (!Number.isFinite(n) || n <= 0 || n > 100000) return s;
-      return toast({ ...s, diamonds: (s.diamonds ?? 0) + n }, 'achievement', `+${n} diamonds`, 'Thank you! Spend them on the Dream team.');
+    case 'ownDreamTeam': {
+      const team = s.dreamTeam ?? [];
+      if (DREAM_ORDER.every((id) => team.includes(id))) return s;
+      const next = withDream({ ...s, dreamTeam: [...DREAM_ORDER] });
+      return toast(next, 'unlock', 'The whole Dream team is yours!', 'Thank you! Hire them from their Dream team cards any morning.');
     }
     case 'unlockDream': {
       if (!isDreamId(a.id)) return s;

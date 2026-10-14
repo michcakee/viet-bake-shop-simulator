@@ -7032,6 +7032,8 @@ html[data-motion='reduced'] .menu-cursor {
   box-shadow: var(--shadow-sm);
 }
 .diamond-pack:last-child { background: linear-gradient(160deg, var(--gem), var(--gem-2)); }
+.dream-pass { width: 100%; }
+.restore-btn { align-self: flex-start; }
 .diamond-pack:disabled { cursor: default; opacity: 0.6; }
 .diamond-pack:not(:disabled):active { transform: translateY(2px); box-shadow: none; }
 .pack-count { display: inline-flex; align-items: center; gap: 4px; font-family: var(--pixel); font-size: 24px; }

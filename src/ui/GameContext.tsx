@@ -131,8 +131,8 @@ export function GameProvider({ children }: { children: ReactNode }) {
     dispatch({ type: 'syncWallet', diamonds, dreamTeam });
   }, [gameKey, state.diamonds, state.dreamTeam]);
 
-  // App Store purchases that finish in the background (approved later, interrupted) still arrive.
-  useEffect(() => listenForPurchases((n) => dispatch({ type: 'addDiamonds', n })), []);
+  // The App Store is the record of the Dream team purchase: ask it on launch, and hear about ones that finish later.
+  useEffect(() => listenForPurchases(() => dispatch({ type: 'ownDreamTeam' })), []);
 
   // Finishing Bà's first week opens the other scenarios for every future game.
   useEffect(() => {
