@@ -36,7 +36,6 @@ input, select, textarea {
   font-weight: bold;
 }
 
-/* The 26 letter tiles use flexbox so they wrap onto new rows */
 .tiles {
   display: flex;
   flex-wrap: wrap;
